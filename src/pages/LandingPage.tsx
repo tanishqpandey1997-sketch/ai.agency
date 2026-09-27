@@ -1,7 +1,7 @@
 import React, { useState, useCallback, useEffect } from 'react';
 import { GoogleGenAI } from "@google/genai";
 import { motion, AnimatePresence } from "motion/react";
-import { Play, Loader2, ArrowRight, Globe } from 'lucide-react';
+import { Play, Loader2, ArrowRight, Globe, Check } from 'lucide-react';
 import { useDropzone } from 'react-dropzone';
 import FUIHeroWithBorders from '../components/ui/herowith-logos';
 import AboutUsSection from '../components/ui/about-us';
@@ -16,6 +16,31 @@ export default function LandingPage() {
   const [veoState, setVeoState] = useState<VeoState>({ status: 'idle' });
   const [selectedImage, setSelectedImage] = useState<string | null>(null);
   const [apiKeySelected, setApiKeySelected] = useState(false);
+
+  const plans = [
+    {
+      name: 'Free',
+      price: '\u20b90',
+      description: 'Explore the workflow and turn one idea into a working first draft.',
+      features: ['1 active project', '5 AI generations', 'Responsive preview', 'Community templates'],
+      action: 'Start free',
+    },
+    {
+      name: 'Pro',
+      price: '\u20b91,499',
+      description: 'For creators and freelancers shipping professional websites regularly.',
+      features: ['Unlimited projects', '150 AI generations', 'Code export', 'Custom domains', 'Version history'],
+      action: 'Choose Pro',
+      featured: true,
+    },
+    {
+      name: 'Agency',
+      price: '\u20b94,999',
+      description: 'For teams managing brands, clients and multiple website launches.',
+      features: ['5 team seats', '500 AI generations', 'Shared brand kits', 'Client approvals', 'Priority support'],
+      action: 'Choose Agency',
+    },
+  ];
 
   useEffect(() => {
     const checkKey = async () => {
@@ -138,7 +163,7 @@ export default function LandingPage() {
                 transition={{ delay: 0.1 }}
                 className="text-lg md:text-xl text-[#FFFFFF] font-light tracking-wide max-w-2xl mx-auto mb-12 leading-relaxed"
               >
-                We use artificial intelligence to build high-performance websites that look amazing and work perfectly. No complexity, just results.
+                Upload a reference screenshot, describe what you need and turn it into a responsive website you can refine, export and publish.
               </motion.p>
 
               <motion.div
@@ -217,6 +242,47 @@ export default function LandingPage() {
 
       <FUIHeroWithBorders />
       <AboutUsSection />
+
+      <section className="border-y border-white/10 px-6 py-28 md:px-10" id="pricing">
+        <div className="mx-auto max-w-7xl">
+          <div className="mb-16 max-w-3xl">
+            <p className="mb-5 text-xs font-bold uppercase tracking-[0.35em] text-white/40">Simple pricing</p>
+            <h2 className="text-5xl font-bold uppercase leading-none tracking-tighter md:text-7xl">Start free. Pay when you ship.</h2>
+            <p className="mt-6 max-w-2xl text-base leading-relaxed text-white/55 md:text-lg">
+              Try the complete creation flow before upgrading. Paid plans unlock more AI generations, code export, publishing and team workflows.
+            </p>
+          </div>
+
+          <div className="grid gap-5 lg:grid-cols-3">
+            {plans.map((plan) => (
+              <article key={plan.name} className={`relative flex min-h-[520px] flex-col rounded-[2rem] border p-8 ${plan.featured ? 'border-white bg-white text-black' : 'border-white/15 bg-white/[0.03] text-white'}`}>
+                {plan.featured && <span className="absolute right-7 top-7 rounded-full bg-black px-4 py-2 text-[10px] font-bold uppercase tracking-[0.2em] text-white">Most popular</span>}
+                <p className={`text-xs font-bold uppercase tracking-[0.3em] ${plan.featured ? 'text-black/50' : 'text-white/40'}`}>{plan.name}</p>
+                <div className="mt-8 flex items-end gap-2">
+                  <span className="text-5xl font-bold tracking-tighter">{plan.price}</span>
+                  <span className={`pb-2 text-xs uppercase tracking-widest ${plan.featured ? 'text-black/45' : 'text-white/35'}`}>{plan.name === 'Free' ? 'forever' : '/ month'}</span>
+                </div>
+                <p className={`mt-6 min-h-16 text-sm leading-relaxed ${plan.featured ? 'text-black/60' : 'text-white/50'}`}>{plan.description}</p>
+                <ul className="mt-8 flex flex-col gap-4">
+                  {plan.features.map((feature) => (
+                    <li key={feature} className="flex items-center gap-3 text-sm"><Check size={16} />{feature}</li>
+                  ))}
+                </ul>
+                <a href="/contact" className={`mt-auto flex items-center justify-between rounded-full px-6 py-4 text-xs font-bold uppercase tracking-[0.2em] transition-transform hover:scale-[1.02] ${plan.featured ? 'bg-black text-white' : 'bg-white text-black'}`}>
+                  {plan.action}<ArrowRight size={16} />
+                </a>
+              </article>
+            ))}
+          </div>
+
+          <div className="mt-16 grid gap-8 rounded-[2rem] border border-white/10 bg-white/[0.03] p-8 md:grid-cols-[0.8fr_1.2fr] md:p-12">
+            <h3 className="text-3xl font-bold uppercase leading-tight tracking-tighter md:text-5xl">What are you paying for?</h3>
+            <p className="text-base leading-relaxed text-white/55 md:text-lg">
+              Not just another generated template. AI.Agency reduces the time, cost and technical effort between an idea and a launch-ready website—while keeping you in control of every design decision.
+            </p>
+          </div>
+        </div>
+      </section>
     </div>
   );
 }

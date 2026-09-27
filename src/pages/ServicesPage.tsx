@@ -7,26 +7,26 @@ import AnimatedShaderBackground from '../components/ui/animated-shader-backgroun
 const servicesData = [
   {
     number: "01",
-    title: "AI Website Development",
-    description: "End-to-end website creation powered by AI and modern frameworks for maximum performance.",
+    title: "Screenshot to Website",
+    description: "Upload a visual reference and generate an editable, responsive website as your starting point.",
     icon: Code,
   },
   {
     number: "02",
-    title: "AI-Assisted UI/UX Design",
-    description: "Rapid interface exploration and premium user experience design using advanced AI tooling.",
+    title: "Prompt-Based Editing",
+    description: "Change layouts, content, styling and components through a simple conversational workflow.",
     icon: Palette,
   },
   {
     number: "03",
-    title: "Performance Optimization",
-    description: "Advanced optimization to achieve lightning-fast loading and perfect performance scores.",
+    title: "UX & Quality Audit",
+    description: "Review accessibility, responsiveness, SEO and performance before your website goes live.",
     icon: Zap,
   },
   {
     number: "04",
-    title: "Automation & Integrations",
-    description: "Integrate APIs, AI tools and automation workflows to streamline digital products.",
+    title: "Export & Publish",
+    description: "Export production-ready code, connect a custom domain or publish directly from one workspace.",
     icon: Cpu,
   },
 ];
